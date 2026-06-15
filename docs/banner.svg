@@ -1,0 +1,59 @@
+<svg width="1280" height="640" viewBox="0 0 1280 640" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="skill-doctor banner">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="#0D1117"/>
+<stop offset="1" stop-color="#10161F"/>
+</linearGradient>
+</defs>
+<rect width="1280" height="640" fill="url(#bg)"/>
+<rect x="0" y="0" width="1280" height="6" fill="#2DD4BF"/>
+
+<g font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<text x="92" y="150" fill="#2DD4BF" font-size="22" font-weight="700" letter-spacing="4">OPEN-SOURCE · CLAUDE CODE SKILL</text>
+
+<text x="88" y="250" fill="#F0F6FC" font-size="100" font-weight="800" letter-spacing="-1">skill-doctor</text>
+
+<path d="M92 296 H300 L322 296 L338 256 L364 350 L388 296 H560" fill="none" stroke="#2DD4BF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="560" cy="296" r="7" fill="#2DD4BF"/>
+
+<text x="92" y="372" fill="#C9D1D9" font-size="40" font-weight="600">Find out why the wrong Claude</text>
+<text x="92" y="424" fill="#C9D1D9" font-size="40" font-weight="600">skill keeps <tspan fill="#F59E0B" font-weight="700">triggering</tspan>.</text>
+
+<g font-size="22" font-weight="600">
+<rect x="92" y="470" width="232" height="50" rx="25" fill="#161B22" stroke="#30363D" stroke-width="1.5"/>
+<text x="208" y="502" fill="#8B949E" text-anchor="middle">Zero dependencies</text>
+<rect x="338" y="470" width="170" height="50" rx="25" fill="#161B22" stroke="#30363D" stroke-width="1.5"/>
+<text x="423" y="502" fill="#8B949E" text-anchor="middle">Python 3.8+</text>
+<rect x="522" y="470" width="150" height="50" rx="25" fill="#161B22" stroke="#30363D" stroke-width="1.5"/>
+<text x="597" y="502" fill="#8B949E" text-anchor="middle">MIT License</text>
+</g>
+</g>
+
+<g font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<rect x="980" y="318" width="180" height="38" rx="8" fill="#F59E0B" opacity="0.20"/>
+<rect x="980" y="318" width="180" height="118" rx="8" fill="#F59E0B" opacity="0.12"/>
+
+<rect x="812" y="150" width="252" height="96" rx="14" fill="#161B22" stroke="#2DD4BF" stroke-width="1.6"/>
+<text x="836" y="195" fill="#F0F6FC" font-size="22" font-weight="700">competitors</text>
+<text x="836" y="222" fill="#8B949E" font-size="16">vs / alternative pages</text>
+
+<rect x="980" y="240" width="252" height="96" rx="14" fill="#161B22" stroke="#2DD4BF" stroke-width="1.6"/>
+<text x="1004" y="285" fill="#F0F6FC" font-size="22" font-weight="700">competitor-profiling</text>
+<text x="1004" y="312" fill="#8B949E" font-size="16">research / dossiers</text>
+
+<rect x="846" y="330" width="252" height="96" rx="14" fill="#161B22" stroke="#2DD4BF" stroke-width="1.6"/>
+<text x="870" y="375" fill="#F0F6FC" font-size="22" font-weight="700">customer-research</text>
+<text x="870" y="402" fill="#8B949E" font-size="16">review mining</text>
+
+<g transform="translate(1058 360)">
+<circle cx="0" cy="0" r="62" fill="#0D1117" fill-opacity="0.35" stroke="#F0F6FC" stroke-width="7"/>
+<line x1="44" y1="44" x2="92" y2="92" stroke="#F0F6FC" stroke-width="12" stroke-linecap="round"/>
+<path d="M-26 0 L-9 0 L-1 -18 L11 20 L19 0 L26 0" fill="none" stroke="#F59E0B" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+
+<text x="812" y="486" fill="#F59E0B" font-size="22" font-weight="700">3 skills · 1 prompt → collision</text>
+</g>
+
+<text x="92" y="600" fill="#586069" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="20">github.com/enmr10/skill-doctor</text>
+<text x="1188" y="600" fill="#586069" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="20" text-anchor="end">by Murtadha Mohammed</text>
+</svg>

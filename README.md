@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="docs/banner.png" alt="skill-doctor — find out why the wrong Claude skill keeps triggering" width="100%">
+</p>
+
 # skill-doctor 🩺 — Audit Your Claude Skills for Conflicts & Collisions
 
 > **skill-doctor is an open-source Claude Code skill that scans a skill library and finds descriptions that collide — the root cause of "the wrong skill keeps triggering." It scores every skill pair, flags duplicate trigger phrases, groups confusable skills into clusters, and tells you exactly which skills to merge, absorb, or disambiguate.**
