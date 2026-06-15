@@ -1,0 +1,14 @@
+{
+  "name": "skill-doctor",
+  "displayName": "skill-doctor",
+  "description": "Audit a Claude skill library for description collisions, duplicate trigger phrases, and quality issues — then get the exact merge/absorb/disambiguate fixes.",
+  "owner": "murtadha-mohammed",
+  "plugins": [
+    {
+      "name": "skill-doctor",
+      "source": "./",
+      "description": "Diagnose why the wrong Claude skill keeps triggering. Scores every skill pair, flags duplicate triggers, clusters confusable skills, and recommends fixes. Zero dependencies.",
+      "skills": ["skills/skill-doctor"]
+    }
+  ]
+}

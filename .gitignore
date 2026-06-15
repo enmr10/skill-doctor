@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Reports / scratch
+report*.md
+report*.json
+manifest-fixed.json
+
+# Portable interpreters / build artifacts
+py/
+py-embed.zip
+_testdata/
+
+# OS
+.DS_Store
+Thumbs.db

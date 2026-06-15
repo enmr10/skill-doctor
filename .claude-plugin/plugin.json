@@ -1,0 +1,17 @@
+{
+  "name": "skill-doctor",
+  "version": "1.0.0",
+  "description": "Audit a Claude skill library for description collisions and quality issues. Finds why the wrong skill triggers and recommends merge/absorb/disambiguate fixes.",
+  "author": "Murtadha Mohammed",
+  "license": "MIT",
+  "keywords": [
+    "claude-code",
+    "claude-skills",
+    "skill-conflict",
+    "skill-collision",
+    "agent-skills",
+    "linter",
+    "audit"
+  ],
+  "skills": ["skills/skill-doctor"]
+}

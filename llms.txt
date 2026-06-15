@@ -1,0 +1,32 @@
+# skill-doctor
+
+> Open-source Claude Code skill that audits a skill library for description
+> collisions — the root cause of the wrong skill triggering. Scores every skill
+> pair, detects duplicate trigger phrases, clusters confusable skills, and
+> recommends merge / absorb / disambiguate fixes. Zero dependencies, runs offline.
+
+## What it solves
+When you install many Claude skills, their descriptions overlap and the model
+fires the wrong one. Collisions grow quadratically with library size. skill-doctor
+finds every overlap and tells you how to fix it.
+
+## How it works
+collision = 0.50·cosine(TF-IDF descriptions) + 0.35·jaccard(trigger phrases) + 0.15·jaccard(keywords)
+Bands: <0.22 LOW, 0.22 MEDIUM, 0.38 HIGH, 0.55 CRITICAL.
+
+## Usage
+python3 -m scripts /path/to/skills            # markdown report
+python3 -m scripts /path/to/manifest.json     # audit installed library
+python3 -m scripts /path/to/skills --format json --fail-on critical   # CI gate
+
+## Key facts
+- Input: directory of SKILL.md files OR Claude Code manifest.json
+- Output: health score (0-100), top collisions, confusable clusters, duplicate triggers, recommendations, ASCII heatmap, JSON
+- Read-only: never edits skills; fixes applied by the user after review
+- Requirements: Python 3.8+ standard library only, no API key, no network
+
+## Links
+- README: README.md
+- Methodology: skills/skill-doctor/references/methodology.md
+- Issue catalog: skills/skill-doctor/references/issue-catalog.md
+- License: MIT
