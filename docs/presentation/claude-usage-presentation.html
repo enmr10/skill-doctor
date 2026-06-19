@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>كيف تستخدم Claude و Claude Code</title>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/theme/black.css" id="theme">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/highlight/monokai.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&family=Fira+Code:wght@500&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --c-bg: #0f1117;
+    --c-bg-2: #161a23;
+    --c-accent: #d97757;
+    --c-accent-2: #f2b880;
+    --c-text: #eef0f4;
+    --c-muted: #9aa3b2;
+  }
+  .reveal{
+    font-family: 'Tajawal', sans-serif;
+    direction: rtl;
+    color: var(--c-text);
+  }
+  .reveal .slides section{ background: transparent; }
+  .reveal-viewport{
+    background: radial-gradient(circle at 20% 20%, #1a1f2b 0%, var(--c-bg) 55%);
+  }
+  .reveal h1, .reveal h2, .reveal h3{
+    font-family: 'Tajawal', sans-serif;
+    font-weight: 900;
+    color: var(--c-text);
+    letter-spacing: 0;
+  }
+  .reveal h2{
+    color: var(--c-accent-2);
+    border-bottom: 3px solid var(--c-accent);
+    padding-bottom: 0.3em;
+    display: inline-block;
+  }
+  .reveal h3 { color: var(--c-accent-2); }
+  .reveal em.brand{
+    font-style: normal;
+    color: var(--c-accent);
+    font-weight: 700;
+  }
+  .reveal p, .reveal li{
+    font-size: 0.85em;
+    line-height: 1.6;
+    color: var(--c-text);
+  }
+  .reveal ul, .reveal ol{ text-align: right; }
+  .reveal .subtitle{
+    color: var(--c-muted);
+    font-size: 0.95em;
+    margin-top: 0.5em;
+  }
+  .title-slide{
+    text-align: center;
+  }
+  .title-slide h1{
+    font-size: 2.4em;
+    background: linear-gradient(90deg, var(--c-accent), var(--c-accent-2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 0.2em;
+  }
+  .badge-row{
+    display:flex; gap:0.6em; justify-content:center; margin-top:1.2em; flex-wrap:wrap;
+  }
+  .badge{
+    border: 1px solid var(--c-accent);
+    color: var(--c-accent-2);
+    border-radius: 999px;
+    padding: 0.25em 0.9em;
+    font-size: 0.5em;
+    font-family: 'Fira Code', monospace;
+  }
+  .grid-2{
+    display:grid; grid-template-columns: 1fr 1fr; gap: 1.2em; text-align:right;
+  }
+  .grid-3{
+    display:grid; grid-template-columns: 1fr 1fr 1fr; gap: 1em; text-align:right;
+  }
+  .card{
+    background: var(--c-bg-2);
+    border: 1px solid #262b38;
+    border-right: 4px solid var(--c-accent);
+    border-radius: 12px;
+    padding: 0.9em 1.1em;
+  }
+  .card h3{ margin: 0 0 0.3em 0; font-size: 0.95em; }
+  .card p, .card li{ font-size: 0.62em; margin: 0.2em 0; color: var(--c-muted); }
+  .step{
+    display:flex; align-items:center; gap:0.8em; margin: 0.6em 0;
+    background: var(--c-bg-2);
+    border-radius: 10px;
+    padding: 0.5em 1em;
+    border: 1px solid #262b38;
+  }
+  .step-num{
+    background: var(--c-accent);
+    color: #1a1208;
+    font-weight: 900;
+    width: 1.6em; height: 1.6em;
+    border-radius: 50%;
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
+    font-family: 'Fira Code', monospace;
+  }
+  pre code{
+    font-family: 'Fira Code', monospace;
+    direction: ltr;
+    text-align: left;
+    border-radius: 10px;
+    font-size: 0.55em;
+  }
+  .reveal .progress{ color: var(--c-accent); }
+  .reveal .controls{ color: var(--c-accent); }
+  .footer-tag{
+    position:absolute; bottom: 1.2em; left: 1.5em;
+    font-size: 0.32em; color: var(--c-muted);
+    font-family: 'Fira Code', monospace;
+  }
+  .icon-big{ font-size: 2.2em; margin-bottom: 0.2em; display:block; }
+  table.compare{ width:100%; font-size: 0.6em; border-collapse: collapse; }
+  table.compare th, table.compare td{
+    border: 1px solid #262b38; padding: 0.5em 0.8em; text-align: right;
+  }
+  table.compare th{ background: var(--c-bg-2); color: var(--c-accent-2); }
+  .quote{
+    font-size: 1.1em; color: var(--c-accent-2); font-weight: 700;
+    border-right: 4px solid var(--c-accent);
+    padding-right: 0.6em;
+  }
+</style>
+</head>
+<body>
+<div class="reveal">
+  <div class="slides">
+
+    <!-- 1: Title -->
+    <section class="title-slide">
+      <h1>كيف تستخدم Claude و Claude Code</h1>
+      <p class="subtitle">دليل عملي شامل للبدء والاحتراف</p>
+      <div class="badge-row">
+        <span class="badge">Anthropic</span>
+        <span class="badge">CLI Agent</span>
+        <span class="badge">Skills · MCP · Subagents</span>
+      </div>
+    </section>
+
+    <!-- 2: Agenda -->
+    <section>
+      <h2>المحتويات</h2>
+      <ol>
+        <li class="fragment fade-right">ما هو Claude؟</li>
+        <li class="fragment fade-right">ما هو Claude Code ولماذا يميّز؟</li>
+        <li class="fragment fade-right">أدوات Claude Code الأساسية</li>
+        <li class="fragment fade-right">نظام الـ Skills والأوامر السريعة</li>
+        <li class="fragment fade-right">الـ Subagents و MCP</li>
+        <li class="fragment fade-right">أفضل ممارسات كتابة الطلبات (Prompting)</li>
+        <li class="fragment fade-right">مثال عملي من البداية للنهاية</li>
+        <li class="fragment fade-right">نصائح وموارد</li>
+      </ol>
+    </section>
+
+    <!-- 3: What is Claude -->
+    <section>
+      <h2>ما هو <em class="brand">Claude</em>؟</h2>
+      <p>عائلة نماذج ذكاء اصطناعي من <strong>Anthropic</strong>، مصمّمة لتكون مفيدة، صادقة، وآمنة.</p>
+      <div class="grid-3" style="margin-top:1em;">
+        <div class="card fragment zoom-in">
+          <span class="icon-big">⚡</span>
+          <h3>Haiku</h3>
+          <p>سريع واقتصادي، مهام خفيفة وردود فورية</p>
+        </div>
+        <div class="card fragment zoom-in">
+          <span class="icon-big">⚖️</span>
+          <h3>Sonnet</h3>
+          <p>توازن مثالي بين السرعة والقدرة — الخيار الافتراضي لمعظم المهام</p>
+        </div>
+        <div class="card fragment zoom-in">
+          <span class="icon-big">🧠</span>
+          <h3>Opus / Fable</h3>
+          <p>أقصى قدرة استدلالية للمهام المعقدة والطويلة</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4: What is Claude Code -->
+    <section>
+      <h2>ما هو <em class="brand">Claude Code</em>؟</h2>
+      <p class="quote">"وكيل برمجي يعمل داخل الطرفية (Terminal) ويتفاعل مباشرة مع ملفاتك ومستودعك."</p>
+      <div class="grid-2" style="margin-top:1.2em;">
+        <div class="card fragment fade-up">
+          <h3>🖥️ أين يعمل؟</h3>
+          <p>CLI، تطبيق سطح المكتب، الويب (claude.ai/code)، وإضافات IDE</p>
+        </div>
+        <div class="card fragment fade-up">
+          <h3>🔧 ما الذي يفعله؟</h3>
+          <p>يقرأ ويعدّل الكود، ينفّذ أوامر shell، يبحث في المشروع، ويُنشئ Commits و PRs</p>
+        </div>
+        <div class="card fragment fade-up">
+          <h3>🔐 آمن بالتصميم</h3>
+          <p>كل أداة تحتاج إذنًا — لا يُنفّذ أمرًا خطيرًا دون موافقتك</p>
+        </div>
+        <div class="card fragment fade-up">
+          <h3>🧩 قابل للتوسعة</h3>
+          <p>Skills، MCP Servers، Hooks، Subagents — كل شيء يُضاف ولا يُكتب من الصفر</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5: Core tools -->
+    <section>
+      <h2>الأدوات الأساسية</h2>
+      <table class="compare">
+        <tr><th>الأداة</th><th>الاستخدام</th></tr>
+        <tr class="fragment fade-in"><td><code>Read / Write / Edit</code></td><td>قراءة وتعديل الملفات بدقة</td></tr>
+        <tr class="fragment fade-in"><td><code>Glob / Grep</code></td><td>البحث عن ملفات أو نصوص في المشروع</td></tr>
+        <tr class="fragment fade-in"><td><code>Bash</code></td><td>تنفيذ أوامر الطرفية (git، npm، pytest...)</td></tr>
+        <tr class="fragment fade-in"><td><code>Agent</code></td><td>تفويض مهام فرعية معقدة لوكيل متخصص</td></tr>
+        <tr class="fragment fade-in"><td><code>WebFetch / WebSearch</code></td><td>جلب معلومات حديثة من الإنترنت</td></tr>
+      </table>
+    </section>
+
+    <!-- 6: Skills system -->
+    <section>
+      <h2>نظام <em class="brand">Skills</em></h2>
+      <p>وحدات معرفة جاهزة تُفعَّل تلقائيًا حسب نية الطلب — أو يدويًا عبر <code>/اسم-المهارة</code>.</p>
+      <div class="step fragment fade-right"><div class="step-num">1</div><div>كل Skill = مجلد فيه <code>SKILL.md</code> يحتوي وصفًا ومحفزات تشغيل</div></div>
+      <div class="step fragment fade-right"><div class="step-num">2</div><div>تتنافس الأوصاف على نية المستخدم — التكرار يسبب "اختيار المهارة الخاطئة"</div></div>
+      <div class="step fragment fade-right"><div class="step-num">3</div><div>أدوات مثل <strong>skill-doctor</strong> تفحص مكتبة المهارات وتكتشف التعارضات</div></div>
+      <div class="step fragment fade-right"><div class="step-num">4</div><div>يمكنك بناء مهاراتك الخاصة لمهام متكررة في مشروعك</div></div>
+    </section>
+
+    <!-- 7: MCP -->
+    <section>
+      <h2>توسيع القدرات: <em class="brand">MCP</em> و Subagents</h2>
+      <div class="grid-2">
+        <div class="card fragment fade-up">
+          <h3>🔌 MCP Servers</h3>
+          <p>بروتوكول موحّد يصل Claude بأدوات وخدمات خارجية: GitHub، Slack، Notion، قواعد البيانات...</p>
+        </div>
+        <div class="card fragment fade-up">
+          <h3>🤖 Subagents</h3>
+          <p>وكلاء متخصصون (بحث، مراجعة كود، اختبار) يعملون بسياق مستقل لحماية النافذة الأساسية</p>
+        </div>
+        <div class="card fragment fade-up">
+          <h3>🪝 Hooks</h3>
+          <p>سلوكيات تلقائية مرتبطة بأحداث: قبل/بعد تنفيذ أداة، عند بدء الجلسة...</p>
+        </div>
+        <div class="card fragment fade-up">
+          <h3>⚙️ Settings</h3>
+          <p>تخصيص الصلاحيات، النماذج، والأدوات المسموح بها عبر <code>settings.json</code></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8: Best practices -->
+    <section>
+      <h2>أفضل ممارسات كتابة الطلبات</h2>
+      <ul>
+        <li class="fragment fade-in">✅ كن محددًا: اذكر الملف، السطر، أو السلوك المتوقع</li>
+        <li class="fragment fade-in">✅ قسّم المهام الكبيرة إلى خطوات واضحة</li>
+        <li class="fragment fade-in">✅ استخدم <code>CLAUDE.md</code> لتوثيق قواعد المشروع الثابتة</li>
+        <li class="fragment fade-in">✅ راجع الفروقات (diff) قبل الموافقة على التغييرات الحساسة</li>
+        <li class="fragment fade-in">🚫 لا تطلب تنفيذ عمليات هدامة دون تأكيد صريح</li>
+      </ul>
+    </section>
+
+    <!-- 9: Practical example -->
+    <section>
+      <h2>مثال عملي</h2>
+      <p class="subtitle">"أضف فحص صحة (health check) لتطبيق Node.js"</p>
+      <div class="step fragment fade-right"><div class="step-num">1</div><div>يفحص Claude بنية المشروع عبر <code>Glob</code> و <code>Grep</code></div></div>
+      <div class="step fragment fade-right"><div class="step-num">2</div><div>يقترح خطة: مسار <code>/health</code> + ملف اختبار</div></div>
+      <div class="step fragment fade-right"><div class="step-num">3</div><div>ينفّذ التعديلات بـ <code>Edit</code> ويشغّل الاختبارات بـ <code>Bash</code></div></div>
+      <div class="step fragment fade-right"><div class="step-num">4</div><div>يلخّص التغييرات ويترك القرار النهائي للـ commit لك</div></div>
+    </section>
+
+    <!-- 10: Closing -->
+    <section class="title-slide">
+      <h2>الخلاصة</h2>
+      <p style="font-size:1em; max-width: 700px; margin: 0.8em auto;">
+        Claude Code ليس مجرد أداة توليد كود — بل وكيل يعمل معك في بيئتك الحقيقية،
+        قابل للتوسعة بلا حدود عبر Skills وMCP، ومصمم ليكون شفافًا وآمنًا في كل خطوة.
+      </p>
+      <div class="badge-row">
+        <span class="badge">docs.claude.com</span>
+        <span class="badge">/help</span>
+        <span class="badge">github.com/anthropics/claude-code</span>
+      </div>
+      <div class="footer-tag">skill-doctor · claude-usage-presentation</div>
+    </section>
+
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/highlight/highlight.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/notes/notes.js"></script>
+<script>
+  Reveal.initialize({
+    hash: true,
+    rtl: true,
+    transition: 'slide',
+    transitionSpeed: 'default',
+    backgroundTransition: 'fade',
+    controlsLayout: 'edges',
+    progress: true,
+    center: true,
+    plugins: [ RevealHighlight, RevealNotes ]
+  });
+</script>
+</body>
+</html>
